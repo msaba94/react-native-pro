@@ -32,7 +32,7 @@ function Home({ navigation }) {
       <TouchableHighlight
         style={styles.registerButton}
         onPress={() => {
-          console.log("Register Tapped");
+          navigation.navigate("Register");
         }}
       >
         <Text style={styles.textView}>Register to Application</Text>
