@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import React, { useState, createRef } from "react";
 import {
   Text,
@@ -7,6 +8,7 @@ import {
   Image,
   TouchableHighlight,
 } from "react-native";
+import * as API from "../constant/API";
 
 function Login({ navigation }) {
   const [userEmail, setUserEmail] = useState("");
@@ -27,8 +29,37 @@ function Login({ navigation }) {
       return;
     }
     setLoading(true);
-    let dataToSend = { email: userEmail, password: userPassword };
-    console.log(dataToSend);
+    let userRequest = { email: userEmail, password: userPassword };
+    fetch(API.BASE_URL + API.USER_LOGIN, {
+      method: "POST",
+      body: JSON.stringify(userRequest),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (responseJson.success === true) {
+          setAsynStorageData(responseJson);
+          navigation.replace("Main");
+        } else {
+          console.log(responseJson.message);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const setAsynStorageData = (userJSON) => {
+    // AsyncStorage.setItem("token", userJSON.token);
+    // AsyncStorage.setItem("companyId", userJSON.user.companyId);
+    // AsyncStorage.setItem("email", userJSON.user.email);
+    // AsyncStorage.setItem("firstName", userJSON.user.firstName);
+    // AsyncStorage.setItem("lastName", userJSON.user.lastName);
+    // AsyncStorage.setItem("phoneNumber", userJSON.user.phoneNumber);
+    // AsyncStorage.setItem("role", userJSON.user.role);
+    AsyncStorage.setItem("userId", "" + userJSON.user.userId);
   };
 
   return (

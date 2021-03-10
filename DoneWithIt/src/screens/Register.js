@@ -57,7 +57,7 @@ function Register({ navigation }) {
             autoCapitalize="none"
             keyboardType="email-address"
             returnKeyType="next"
-            onChangeText={(username) => setUserEmail(username)}
+            onChangeText={(userEmail) => setUserEmail(userEmail)}
           />
         </View>
 
