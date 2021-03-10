@@ -33,15 +33,6 @@ const Auth = () => {
 function App() {
   const Stack = createStackNavigator();
 
-  const getUserId = () => {
-    const isLogin = false;
-    AsyncStorage.getItem("userId").then((value) =>
-      value === null ? isLogin === false : isLogin === true
-    );
-
-    return isLogin;
-  };
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SplashScreen">

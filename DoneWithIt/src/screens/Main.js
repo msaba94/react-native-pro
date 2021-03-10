@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ImageBackground } from "react-native";
 
-function Main(props) {
+function Main({ navigation }) {
   return (
-    <View styles={styles.background}>
-      <Text>Main Activity Screen</Text>
+    <View style={styles.bgContent}>
+      <Text style={styles.mainContent}>Main Activity Screen</Text>
     </View>
   );
 }
@@ -12,10 +12,14 @@ function Main(props) {
 export default Main;
 
 const styles = StyleSheet.create({
-  background: {
+  bgContent: {
     flex: 1,
-    backgroundColor: "#fc5c65",
     justifyContent: "center",
     alignItems: "center",
+  },
+  mainContent: {
+    textAlign: "center",
+    color: "red",
+    fontSize: 20,
   },
 });
