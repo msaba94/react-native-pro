@@ -30,9 +30,9 @@ const Auth = () => {
   );
 };
 
-function App() {
-  const Stack = createStackNavigator();
+const Stack = createStackNavigator();
 
+function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SplashScreen">

@@ -52,7 +52,7 @@ function Login({ navigation }) {
   };
 
   const setAsynStorageData = (userJSON) => {
-    // AsyncStorage.setItem("token", userJSON.token);
+    AsyncStorage.setItem("token", userJSON.token);
     // AsyncStorage.setItem("companyId", userJSON.user.companyId);
     // AsyncStorage.setItem("email", userJSON.user.email);
     // AsyncStorage.setItem("firstName", userJSON.user.firstName);

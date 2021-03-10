@@ -1,26 +1,34 @@
+import AsyncStorage from "@react-native-community/async-storage";
 import React from "react";
+import { useEffect } from "react";
 import {
   Text,
   View,
   StyleSheet,
   SafeAreaView,
   FlatList,
+  Image,
   StatusBar,
 } from "react-native";
+import * as API from "../constant/API";
 
 function Main({ navigation }) {
-  var rawdata = [
-    { id: "1", title: "Item #1" },
-    { id: "2", title: "Item #2" },
-    { id: "3", title: "Item #3" },
-    { id: "4", title: "Item #4" },
-    { id: "5", title: "Item #5" },
-  ];
+  var rawdata = [];
 
-  const Item = ({ title }) => {
+  const Item = ({ team }) => {
     return (
       <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
+        <Image
+          style={styles.rowImage}
+          source={require("../assets/user-profile-placeholder.png")}
+        ></Image>
+
+        <View styles={styles.leftRow}>
+          <Text styles={styles.teamName}>{team.name} (Team Name)</Text>
+          <Text styles={styles.teamAM}>
+            {team.accountManager.firstName} {team.accountManager.lastName} (AM)
+          </Text>
+        </View>
       </View>
     );
   };
@@ -32,7 +40,7 @@ function Main({ navigation }) {
       <FlatList
         data={rawdata}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.teamId}
       />
     </SafeAreaView>
   );
@@ -43,13 +51,35 @@ export default Main;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight,
+  },
+  rowImage: {
+    width: 75,
+    height: 75,
+    borderRadius: 50,
+    marginRight: 16,
+  },
+  leftRow: {},
+  teamName: {
+    fontWeight: "bold",
+    color: "red",
+  },
+  teamAM: {
+    fontSize: 20,
+    color: "red",
+  },
+  teamTL: {
+    fontSize: 20,
+    color: "red",
   },
   item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    top: StatusBar.currentHeight + 8,
+    paddingBottom: 8,
+    paddingStart: 8,
+    paddingEnd: 8,
+    paddingTop: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    margin: StyleSheet.hairlineWidth,
+    flexDirection: "row",
   },
   title: {
     fontSize: 32,
