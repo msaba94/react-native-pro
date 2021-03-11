@@ -13,7 +13,80 @@ import {
 import * as API from "../constant/API";
 
 function Main({ navigation }) {
-  var rawdata = [];
+  var rawdata = [
+    {
+      id: "1",
+      name: "Harman",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "2",
+      name: "Wipro",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "3",
+      name: "Altimetrik Corporation",
+      accountManage: {
+        firstName: "Rathina Sabapathi",
+        userId: 3,
+      },
+    },
+    {
+      id: "4",
+      name: "Harman",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "5",
+      name: "Wipro",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "6",
+      name: "Altimetrik Corporation",
+      accountManage: {
+        firstName: "Rathina Sabapathi",
+        userId: 3,
+      },
+    },
+    {
+      id: "7",
+      name: "Harman",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "8",
+      name: "Wipro",
+      accountManage: {
+        firstName: "Bala Murali",
+        userId: 2,
+      },
+    },
+    {
+      id: "9",
+      name: "Altimetrik Corporation",
+      accountManage: {
+        firstName: "Rathina Sabapathi",
+        userId: 3,
+      },
+    },
+  ];
 
   const Item = ({ team }) => {
     return (
@@ -23,26 +96,26 @@ function Main({ navigation }) {
           source={require("../assets/user-profile-placeholder.png")}
         ></Image>
 
-        <View styles={styles.leftRow}>
+        <View>
           <Text styles={styles.teamName}>{team.name} (Team Name)</Text>
           <Text styles={styles.teamAM}>
-            {team.accountManager.firstName} {team.accountManager.lastName} (AM)
+            {team.accountManage.firstName} (AM)
           </Text>
         </View>
       </View>
     );
   };
 
-  const renderItem = ({ item }) => <Item title={item.title} />;
+  const renderItem = ({ item }) => <Item team={item} />;
 
   return (
-    <SafeAreaView styles={styles.container}>
+    <View styles={styles.container}>
       <FlatList
         data={rawdata}
         renderItem={renderItem}
-        keyExtractor={(item) => item.teamId}
+        keyExtractor={(team) => team.id}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -60,19 +133,22 @@ const styles = StyleSheet.create({
   },
   leftRow: {},
   teamName: {
+    fontSize: 24,
     fontWeight: "bold",
     color: "red",
+    flexDirection: "row",
   },
   teamAM: {
     fontSize: 20,
     color: "red",
+    flexDirection: "row",
   },
   teamTL: {
     fontSize: 20,
     color: "red",
+    flexDirection: "row",
   },
   item: {
-    top: StatusBar.currentHeight + 8,
     paddingBottom: 8,
     paddingStart: 8,
     paddingEnd: 8,
@@ -80,6 +156,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     margin: StyleSheet.hairlineWidth,
     flexDirection: "row",
+    width: "100%",
   },
   title: {
     fontSize: 32,
