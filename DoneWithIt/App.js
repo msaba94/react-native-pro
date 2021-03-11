@@ -7,6 +7,7 @@ import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
 import Main from "./src/screens/Main";
 import SplashScreen from "./src/screens/SplashScreen";
+import TeamDetail from "./src/screens/TeamDetail";
 
 const Auth = () => {
   return (
@@ -49,6 +50,11 @@ function App() {
         <Stack.Screen
           name="Main"
           component={Main}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TeamDetail"
+          component={TeamDetail}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

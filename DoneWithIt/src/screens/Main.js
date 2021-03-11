@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-community/async-storage";
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import {
   Text,
@@ -10,13 +11,20 @@ import {
   Image,
   StatusBar,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import * as API from "../constant/API";
 
 function Main({ navigation }) {
+  const [teams, setTeams] = useState([]);
+  const [companyId, setCompanyId] = useState();
+  const [token, setToken] = useState("");
+  const [userId, setUserId] = useState();
+
   var rawdata = [
     {
       id: "1",
       name: "Harman",
+      url: "https://cdn2.thecatapi.com/images/14p.gif",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -25,6 +33,7 @@ function Main({ navigation }) {
     {
       id: "2",
       name: "Wipro",
+      url: "https://cdn2.thecatapi.com/images/27r.jpg",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -33,6 +42,7 @@ function Main({ navigation }) {
     {
       id: "3",
       name: "Altimetrik Corporation",
+      url: "https://cdn2.thecatapi.com/images/6rb.gif",
       accountManage: {
         firstName: "Rathina Sabapathi",
         userId: 3,
@@ -41,6 +51,7 @@ function Main({ navigation }) {
     {
       id: "4",
       name: "Harman",
+      url: "https://cdn2.thecatapi.com/images/c58.jpg",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -49,6 +60,7 @@ function Main({ navigation }) {
     {
       id: "5",
       name: "Wipro",
+      url: "https://cdn2.thecatapi.com/images/cjd.jpg",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -57,6 +69,7 @@ function Main({ navigation }) {
     {
       id: "6",
       name: "Altimetrik Corporation",
+      url: "https://cdn2.thecatapi.com/images/de1.jpg",
       accountManage: {
         firstName: "Rathina Sabapathi",
         userId: 3,
@@ -65,6 +78,7 @@ function Main({ navigation }) {
     {
       id: "7",
       name: "Harman",
+      url: "https://cdn2.thecatapi.com/images/dnn.jpg",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -73,6 +87,7 @@ function Main({ navigation }) {
     {
       id: "8",
       name: "Wipro",
+      url: "https://cdn2.thecatapi.com/images/MTU3ODY4MA.jpg",
       accountManage: {
         firstName: "Bala Murali",
         userId: 2,
@@ -81,6 +96,7 @@ function Main({ navigation }) {
     {
       id: "9",
       name: "Altimetrik Corporation",
+      url: "https://cdn2.thecatapi.com/images/USpC6E-ws.jpg",
       accountManage: {
         firstName: "Rathina Sabapathi",
         userId: 3,
@@ -90,10 +106,12 @@ function Main({ navigation }) {
 
   const Item = ({ team }) => {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={() => teamTapped(team)}>
         <Image
           style={styles.rowImage}
-          source={require("../assets/user-profile-placeholder.png")}
+          source={{
+            uri: team.url,
+          }}
         ></Image>
 
         <View>
@@ -102,11 +120,52 @@ function Main({ navigation }) {
             {team.accountManage.firstName} (AM)
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
+  const teamTapped = (team) => {
+    console.log(team.name);
+    navigation.navigate("TeamDetail");
+  };
+
   const renderItem = ({ item }) => <Item team={item} />;
+
+  const fetchTeams = () => {
+    AsyncStorage.getItem("userId").then((value) => {
+      setUserId(value);
+      console.log("UserId: ", userId);
+    });
+
+    AsyncStorage.getItem("token").then((value) => {
+      setToken(value);
+      console.log("Token: " + token);
+    });
+
+    AsyncStorage.getItem("companyId").then((value) => {
+      setCompanyId(value);
+      console.log("Company Id: " + companyId);
+    });
+
+    let companyIdJSON = { companyId: setCompanyId };
+
+    fetch(API.BASE_URL + API.GET_TEAMS, {
+      method: "POST",
+      body: JSON.stringify(companyIdJSON),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: setToken,
+      },
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+        setTeams(responseJson.teams);
+        console.log(setTeams);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  // fetchTeams();
 
   return (
     <View styles={styles.container}>
