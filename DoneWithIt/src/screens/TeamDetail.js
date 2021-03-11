@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-function TeamDetail(props) {
+function TeamDetail({ route, navigation }) {
+  const { team } = route.params;
   return (
     <View style={styles.container}>
-      <Text>Team Details</Text>
+      <Text>{team.name}</Text>
     </View>
   );
 }

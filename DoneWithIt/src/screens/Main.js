@@ -126,7 +126,9 @@ function Main({ navigation }) {
 
   const teamTapped = (team) => {
     console.log(team.name);
-    navigation.navigate("TeamDetail");
+    navigation.navigate("TeamDetail", {
+      team: team,
+    });
   };
 
   const renderItem = ({ item }) => <Item team={item} />;
