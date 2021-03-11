@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
 } from "react-native";
 import * as API from "../constant/API";
+import * as Color from "../constant/Color";
 
 function Login({ navigation }) {
   const [userEmail, setUserEmail] = useState("");
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
   },
   bgContainer: {
     flex: 0.2,
-    backgroundColor: "#fc5c65",
+    backgroundColor: Color.PrimaryColor,
     borderBottomEndRadius: 40,
     borderBottomLeftRadius: 40,
     justifyContent: "center",
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
-    color: "#fc5c65",
+    color: Color.PrimaryColor,
   },
   submittButton: {
     width: "50%",
@@ -150,7 +151,7 @@ const styles = StyleSheet.create({
     paddingRight: 35,
     margin: 10,
     borderRadius: 30,
-    backgroundColor: "#fc5c65",
+    backgroundColor: Color.PrimaryColor,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 30,
-    borderColor: "#fc5c65",
+    borderColor: Color.PrimaryColor,
   },
   logo: {
     width: 100,

@@ -7,6 +7,7 @@ import {
   Text,
   TouchableHighlight,
 } from "react-native";
+import * as Color from "../constant/Color";
 
 function Home({ navigation }) {
   return (
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     height: 100,
   },
   welcomeText: {
-    color: "#fc5c65",
+    color: Color.PrimaryColor,
     fontSize: 25,
     top: 20,
     fontWeight: "bold",
@@ -68,14 +69,14 @@ const styles = StyleSheet.create({
   loginButton: {
     width: "100%",
     height: 60,
-    backgroundColor: "#fc5c65",
+    backgroundColor: Color.PrimaryColor,
     justifyContent: "center",
     alignContent: "center",
   },
   registerButton: {
     width: "100%",
     height: 60,
-    backgroundColor: "#4ecdc4",
+    backgroundColor: Color.SecondaryColor,
     justifyContent: "center",
     alignContent: "center",
   },
