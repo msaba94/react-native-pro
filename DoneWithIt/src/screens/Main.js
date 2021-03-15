@@ -6,13 +6,12 @@ import {
   Text,
   View,
   StyleSheet,
-  SafeAreaView,
   FlatList,
   Image,
-  StatusBar,
+  TouchableOpacity,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import * as API from "../constant/API";
+import * as Color from "../constant/Color";
 
 function Main({ navigation }) {
   const [teams, setTeams] = useState([]);
@@ -104,6 +103,23 @@ function Main({ navigation }) {
     },
   ];
 
+  const teamTapped = (team) => {
+    navigation.navigate("TeamDetail", {
+      team: team,
+    });
+  };
+
+  const renderItem = ({ item }) => <Item team={item} />;
+
+  const fetchTeams = () => {
+    fetch("https://api.thecatapi.com/v1/images/search?limit=10&page=1")
+      .then((response) => response.json())
+      .then((responseJson) => responseJson)
+      .catch((e) => console.log(e));
+  };
+
+  // fetchTeams();
+
   const Item = ({ team }) => {
     return (
       <TouchableOpacity style={styles.item} onPress={() => teamTapped(team)}>
@@ -124,21 +140,6 @@ function Main({ navigation }) {
     );
   };
 
-  const teamTapped = (team) => {
-    navigation.navigate("TeamDetail", { team: team });
-  };
-
-  const renderItem = ({ item }) => <Item team={item} />;
-
-  const fetchTeams = () => {
-    fetch("https://api.thecatapi.com/v1/images/search?limit=10&page=1")
-      .then((response) => response.json())
-      .then((responseJson) => responseJson)
-      .catch((e) => console.log(e));
-  };
-
-  // fetchTeams();
-
   return (
     <View styles={styles.container}>
       <FlatList
@@ -156,28 +157,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  teamName: {
+    fontSize: 20,
+  },
+  teamAM: {
+    fontStyle: 18,
+  },
   rowImage: {
     width: 75,
     height: 75,
     borderRadius: 50,
     marginRight: 16,
-  },
-  leftRow: {},
-  teamName: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "red",
-    flexDirection: "row",
-  },
-  teamAM: {
-    fontSize: 20,
-    color: "red",
-    flexDirection: "row",
-  },
-  teamTL: {
-    fontSize: 20,
-    color: "red",
-    flexDirection: "row",
   },
   item: {
     paddingBottom: 8,
@@ -187,10 +177,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     margin: StyleSheet.hairlineWidth,
     flexDirection: "row",
-    width: "100%",
-  },
-  title: {
-    fontSize: 32,
-    color: "#000",
   },
 });

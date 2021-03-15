@@ -7,6 +7,7 @@ import {
   Image,
   TouchableHighlight,
 } from "react-native";
+import * as Color from "../constant/Color";
 
 function Register({ navigation }) {
   const [userEmail, setUserEmail] = useState("");
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
   bgContainer: {
     flex: 0.2,
-    backgroundColor: "#4ecdc4",
+    backgroundColor: Color.SecondaryColor,
     borderBottomEndRadius: 40,
     borderBottomLeftRadius: 40,
     justifyContent: "center",
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
-    color: "#4ecdc4",
+    color: Color.SecondaryColor,
   },
   submittButton: {
     width: "50%",
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     paddingRight: 35,
     margin: 10,
     borderRadius: 30,
-    backgroundColor: "#4ecdc4",
+    backgroundColor: Color.SecondaryColor,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderWidth: 1,
     borderRadius: 30,
-    borderColor: "#4ecdc4",
+    borderColor: Color.SecondaryColor,
   },
   logo: {
     width: 100,
