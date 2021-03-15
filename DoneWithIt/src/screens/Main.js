@@ -10,8 +10,12 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import * as API from "../constant/API";
-import * as Color from "../constant/Color";
+
+// constants
+import { theme } from "../constant";
+
+// theme
+const { COLORS, FONTS, SIZES } = theme;
 
 function Main({ navigation }) {
   const [teams, setTeams] = useState([]);
@@ -131,8 +135,20 @@ function Main({ navigation }) {
         ></Image>
 
         <View>
-          <Text styles={styles.teamName}>{team.name} (Team Name)</Text>
-          <Text styles={styles.teamAM}>
+          <Text
+            styles={{
+              ...FONTS.h3,
+              color: COLORS.gray,
+            }}
+          >
+            {team.name} (Team Name)
+          </Text>
+          <Text
+            styles={{
+              ...FONTS.h4,
+              color: COLORS.black,
+            }}
+          >
             {team.accountManage.firstName} (AM)
           </Text>
         </View>
@@ -156,12 +172,7 @@ export default Main;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  teamName: {
-    fontSize: 20,
-  },
-  teamAM: {
-    fontStyle: 18,
+    backgroundColor: COLORS.gray,
   },
   rowImage: {
     width: 75,
@@ -170,10 +181,10 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   item: {
-    paddingBottom: 8,
-    paddingStart: 8,
-    paddingEnd: 8,
-    paddingTop: 8,
+    paddingBottom: SIZES.base,
+    paddingStart: SIZES.base,
+    paddingEnd: SIZES.base,
+    paddingTop: SIZES.base,
     borderBottomWidth: StyleSheet.hairlineWidth,
     margin: StyleSheet.hairlineWidth,
     flexDirection: "row",
