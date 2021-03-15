@@ -2,9 +2,11 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 function TeamDetail(props) {
+  const team = props.team;
+
   return (
     <View style={styles.container}>
-      <Text>Team Details</Text>
+      <Text>{team.name}</Text>
     </View>
   );
 }

@@ -125,43 +125,15 @@ function Main({ navigation }) {
   };
 
   const teamTapped = (team) => {
-    console.log(team.name);
-    navigation.navigate("TeamDetail");
+    navigation.navigate("TeamDetail", { team: team });
   };
 
   const renderItem = ({ item }) => <Item team={item} />;
 
   const fetchTeams = () => {
-    AsyncStorage.getItem("userId").then((value) => {
-      setUserId(value);
-      console.log("UserId: ", userId);
-    });
-
-    AsyncStorage.getItem("token").then((value) => {
-      setToken(value);
-      console.log("Token: " + token);
-    });
-
-    AsyncStorage.getItem("companyId").then((value) => {
-      setCompanyId(value);
-      console.log("Company Id: " + companyId);
-    });
-
-    let companyIdJSON = { companyId: setCompanyId };
-
-    fetch(API.BASE_URL + API.GET_TEAMS, {
-      method: "POST",
-      body: JSON.stringify(companyIdJSON),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: setToken,
-      },
-    })
+    fetch("https://api.thecatapi.com/v1/images/search?limit=10&page=1")
       .then((response) => response.json())
-      .then((responseJson) => {
-        setTeams(responseJson.teams);
-        console.log(setTeams);
-      })
+      .then((responseJson) => responseJson)
       .catch((e) => console.log(e));
   };
 
